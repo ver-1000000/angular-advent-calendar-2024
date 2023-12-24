@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href /angular-advent-calendar-2023/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:angular-advent-calendar-2023": "node dist/angular-advent-calendar-2023/server/server.mjs",
