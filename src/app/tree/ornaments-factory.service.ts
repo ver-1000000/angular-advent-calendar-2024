@@ -158,6 +158,16 @@ const ARTICLE_SEED: [string, string, string][] = [
     'https://kasaharu.hatenablog.com/entry/20231201/1701381600',
     'kasaharu',
   ],
+  [
+    '𝓗𝓪𝓹𝓹𝔂 𝓜𝓮𝓻𝓻𝔂 𝓒𝓱𝓻𝓲𝓼𝓽𝓶𝓪𝓼...',
+    'https://qiita.com/ver1000000/items/36154cb31a3bdba1a51d',
+    'ver1000000 ',
+  ],
+  [
+    'Angularでのボタンコンポーネントの作成',
+    'https://zenn.dev/lacolaco/articles/angular-advent-calendar-2023',
+    'lacolaco ',
+  ],
 ];
 
 /**
