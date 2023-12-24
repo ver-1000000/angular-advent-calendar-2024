@@ -1,0 +1,28 @@
+<svg
+  attr.viewBox="0 0 {{ viewBoxSize }} {{ viewBoxSize }}"
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  preserveAspectRatio="xMidYMid slice"
+>
+  <defs>
+    <g id="star">
+      <path d="M -25,25 h 50" vector-effect="non-scaling-stroke" />
+      <path d="M 0,0 v 50" vector-effect="non-scaling-stroke" />
+    </g>
+    <g id="asterisk">
+      <path d="m 0,3 v 45" vector-effect="non-scaling-stroke" />
+      <path d="m 15,10 -30,30" vector-effect="non-scaling-stroke" />
+      <path d="m -15,10 30,30" vector-effect="non-scaling-stroke" />
+    </g>
+  </defs>
+  <g id="background">
+    <rect width="800" height="800" x="0" y="0" style="fill: #628592" />
+    <circle cx="400" cy="800" r="600" style="fill: #87a4af" />
+  </g>
+  @for (asterisk of asterisks; track asterisk.id) {
+    <use href="#asterisk" [attr.transform]="asterisk.transform" />
+  }
+  @for (star of stars; track star.id) {
+    <use href="#star" [attr.transform]="star.transform" />
+  }
+</svg>

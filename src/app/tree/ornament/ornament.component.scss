@@ -1,0 +1,27 @@
+.connector,
+.body {
+  stroke-width: 5;
+  stroke: #000000;
+}
+
+.connector {
+  stroke-linecap: round;
+}
+
+.body {
+  paint-order: fill markers stroke;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+:host {
+  cursor: pointer;
+}
+
+.day {
+  fill: #fff;
+}
+
+:host.disabled {
+  cursor: not-allowed;
+}

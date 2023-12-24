@@ -1,0 +1,35 @@
+<svg
+  width="800"
+  height="800"
+  viewBox="0 0 800 600"
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:svg="http://www.w3.org/2000/svg"
+>
+  <path
+    class="path tree"
+    d="M 400,142 260,319 h 32 L 180,460 h 32 L 100,601 H 132 l -32,41 h 600 l -32,-41 h 32 L 588,460 h 32 L 508,319 H 540 Z"
+  />
+  <path
+    class="path star"
+    d="M 400,48 423,78 459,92 437,123 436,162 400,150 363,162 362,123 341,92 376,78 Z"
+    (click)="navigateToAdventCalendar()"
+  />
+  <path class="path ground" d="M 72,642 H 747" />
+  <path class="path ground" d="M 34,642 H 54" />
+  <path class="path ground" d="m 12,642 h 5" />
+  <path class="path ground" d="m 762,642 h 20" />
+  @for (ornament of ornaments; track ornament.id; let index = $index) {
+    <g
+      app-ornament
+      [day]="index + 1"
+      [x]="ornament.x"
+      [y]="ornament.y"
+      [fill]="ornament.fill"
+      [type]="ornament.type"
+      [link]="ornament.article.url"
+      [title]="ornament.article.title"
+      [author]="ornament.article.qiitaName"
+    ></g>
+  }
+</svg>
