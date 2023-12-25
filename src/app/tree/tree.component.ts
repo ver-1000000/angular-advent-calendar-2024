@@ -16,29 +16,27 @@ import { Ornament } from './ornament/ornament';
  */
 @Component({
   selector: 'app-tree',
-  standalone: true,
-  imports: [OrnamentComponent],
-  providers: [TreeUsecaseService],
   templateUrl: './tree.component.html',
   styleUrl: './tree.component.scss',
+  imports: [OrnamentComponent],
+  providers: [TreeUsecaseService],
+  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeComponent {
   private treeUsecaseService = inject(TreeUsecaseService);
   ornaments = signal<Ornament[]>([]);
 
-  async ngOnInit(): Promise<void> {
-    this.updateOrnaments();
+  ngOnInit(): void {
+    this.setOrnaments();
   }
 
   /**
    * ユースケースを利用して、
-   * コンポーネントが保持するステート(`this.ornaments`)の更新を行う。
-   *
-   * 初期化時に呼ばれる。
+   * コンポーネントが保持するステート(`this.ornaments`)を更新する。
    */
-  private updateOrnaments(): void {
-    const ornaments = this.treeUsecaseService.getOrnaments();
+  private async setOrnaments(): Promise<void> {
+    const ornaments = await this.treeUsecaseService.getOrnaments();
     this.ornaments.set(ornaments);
   }
 
