@@ -1,22 +1,14 @@
 import { DIALOG_DATA } from '@angular/cdk/dialog';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-
-type DialogData = {
-  title: string;
-  link: string;
-  author: string;
-  day: number;
-  accsentColor: string;
-};
+import { Ornament } from '../ornament/ornament';
 
 @Component({
   selector: 'app-ornament-dialog',
-  standalone: true,
-  imports: [],
   templateUrl: './ornament-dialog.component.html',
   styleUrl: './ornament-dialog.component.scss',
+  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrnamentDialogComponent {
-  data = inject<DialogData>(DIALOG_DATA);
+  article = inject<Ornament['article']>(DIALOG_DATA);
 }

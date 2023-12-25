@@ -1,14 +1,16 @@
-<dl class="list" [style.--accent-color]="data.accsentColor">
+<dl class="list">
   <dt class="term">Day</dt>
-  <dd class="description">{{ data.day }}</dd>
+  <dd class="description">{{ article.day }}</dd>
   <dt class="term">Author</dt>
   <dd class="description">
-    <a href="https://qiita.com/{{ data.author }}">&#64;{{ data.author }}</a>
+    <a href="https://qiita.com/{{ article.author }}">
+      &#64;{{ article.author }}
+    </a>
   </dd>
   <dt class="term">Title</dt>
-  <dd class="description">{{ data.title }}</dd>
+  <dd class="description">{{ article.title }}</dd>
   <dt class="term">Link</dt>
   <dd class="description">
-    <a [href]="data.link">{{ data.link }}</a>
+    <a [href]="article.url">{{ article.url }}</a>
   </dd>
 </dl>

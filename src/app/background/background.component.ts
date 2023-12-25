@@ -28,6 +28,10 @@ class Particle {
 export class BackgroundComponent {
   /** TODO: environment.tsからDIできるようにする */
   readonly viewBoxSize = 800;
-  readonly asterisks = [...Array(12)].map((_, i) => new Particle(i, this.viewBoxSize));
-  readonly stars = [...Array(12)].map((_, i) => new Particle(i, this.viewBoxSize));
+  readonly asterisks = [...Array(12)].map(
+    (_, i) => new Particle(i, this.viewBoxSize),
+  );
+  readonly stars = [...Array(12)].map(
+    (_, i) => new Particle(i, this.viewBoxSize),
+  );
 }

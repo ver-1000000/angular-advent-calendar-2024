@@ -18,8 +18,9 @@
   cursor: pointer;
 }
 
-.day {
+text.day {
   fill: #fff;
+  text-anchor: middle;
 }
 
 :host.disabled {

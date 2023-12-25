@@ -1,39 +1,56 @@
-@switch (type) {
-  @case ("circle") {
-    <svg:path class="connector" attr.d="m {{ x }},{{ y }} v 10" />
-    <svg:circle
-      class="body"
-      r="20"
-      [attr.fill]="fill"
-      [attr.cx]="x"
-      [attr.cy]="y + 30"
-    />
+<svg:g>
+  <path class="connector" [attr.d]="vm.connectorD" />
+  @switch (vm.type) {
+    @case ("circle") {
+      <circle
+        class="body"
+        attr.fill="url(#{{ vm.patternId }})"
+        [attr.r]="vm.circle.r"
+        [attr.cx]="vm.circle.cx"
+        [attr.cy]="vm.circle.cy"
+      />
+    }
+    @case ("square") {
+      <rect
+        class="body"
+        attr.fill="url(#{{ vm.patternId }})"
+        [attr.width]="vm.square.size"
+        [attr.height]="vm.square.size"
+        [attr.x]="vm.square.x"
+        [attr.y]="vm.square.y"
+      />
+    }
+    @case ("triangle") {
+      <polygon
+        class="body"
+        [attr.points]="vm.triangle.points"
+        attr.fill="url(#{{ vm.patternId }})"
+      />
+    }
   }
-  @case ("square") {
-    <svg:path class="connector" attr.d="m {{ x }},{{ y }} v 10" />
-    <svg:rect
-      class="body"
-      width="40"
-      height="40"
-      [attr.fill]="fill"
-      [attr.x]="x - 20"
-      [attr.y]="y + 10"
-    />
-  }
-  @case ("triangle") {
-    <svg:path class="connector" attr.d="m {{ x }},{{ y - 10 }} v 10" />
-    <svg:polygon
-      class="body"
-      attr.points="
-        {{ x }},{{ y }}
-        {{ x - 20 }},{{ y + 40 }}
-        {{ x + 20 }},{{ y + 40 }}
-      "
-      [attr.fill]="fill"
-    />
-  }
-}
 
-<svg:text class="day" [attr.x]="x - (day < 10 ? 5 : 8)" [attr.y]="y + 35">
-  {{ day }}
-</svg:text>
+  <defs>
+    <pattern
+      [id]="vm.patternId"
+      [attr.width]="vm.imageSize"
+      [attr.height]="vm.imageSize"
+    >
+      <image
+        [attr.href]="vm.imageHref"
+        [attr.width]="vm.imageSize"
+        [attr.height]="vm.imageSize"
+        [attr.x]="vm.imageDelta"
+        [attr.y]="vm.imageDelta"
+      />
+    </pattern>
+  </defs>
+
+  <text
+    class="day"
+    dominant-baseline="middle"
+    [attr.x]="vm.dayX"
+    [attr.y]="vm.dayY"
+  >
+    {{ vm.day }}
+  </text>
+</svg:g>

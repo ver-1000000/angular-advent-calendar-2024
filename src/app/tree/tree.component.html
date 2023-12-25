@@ -19,17 +19,7 @@
   <path class="path ground" d="M 34,642 H 54" />
   <path class="path ground" d="m 12,642 h 5" />
   <path class="path ground" d="m 762,642 h 20" />
-  @for (ornament of ornaments; track ornament.id; let index = $index) {
-    <g
-      app-ornament
-      [day]="index + 1"
-      [x]="ornament.x"
-      [y]="ornament.y"
-      [fill]="ornament.fill"
-      [type]="ornament.type"
-      [link]="ornament.article.url"
-      [title]="ornament.article.title"
-      [author]="ornament.article.qiitaName"
-    ></g>
+  @for (ornament of ornaments(); track ornament.id; let index = $index) {
+    <g app-ornament [ornament]="ornament"></g>
   }
 </svg>
