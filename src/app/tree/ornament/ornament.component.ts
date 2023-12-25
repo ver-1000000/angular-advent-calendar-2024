@@ -60,6 +60,7 @@ class ViewModel {
   readonly type!: Ornament['type'];
   readonly patternId!: string;
   readonly connectorD!: string;
+  readonly color!: string;
   readonly imageSize!: string;
   readonly imageDelta!: string;
   readonly imageHref!: string;
@@ -74,6 +75,7 @@ class ViewModel {
     this.type = ornament.type;
     this.patternId = `ornament-pattern-${ornament.id}`;
     this.connectorD = `m ${ornament.x},${ornament.y} v ${STROKE_LENGTH}`;
+    this.color = `hsl(${ornament.id * 190}, 70%, 50%)`;
     this.imageSize = (VIEW_BOX_SIZE / 12.5).toFixed(1);
     this.imageDelta = (VIEW_BOX_SIZE * -0.015).toFixed(1);
     this.imageHref = ornament.icon;
@@ -99,7 +101,6 @@ function transformViewModel(ornament: Ornament) {
 @Component({
   selector: '[app-ornament]',
   standalone: true,
-  imports: [],
   templateUrl: './ornament.component.html',
   styleUrl: './ornament.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -116,6 +117,10 @@ export class OrnamentComponent {
   @HostListener('click', ['$event']) onClick(_: MouseEvent) {
     if (this.disabled) return;
     const data: Ornament['article'] = this.vm.ornament.article;
-    this.dialog.open(OrnamentDialogComponent, { data });
+    const dialog = this.dialog.open(OrnamentDialogComponent, { data });
+    dialog.overlayRef.hostElement.attributeStyleMap.set(
+      '--accent-color',
+      this.vm.color,
+    );
   }
 }
