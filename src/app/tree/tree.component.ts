@@ -1,9 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { inject, signal } from '@angular/core';
 import { OrnamentComponent } from './ornament/ornament.component';
 import { TreeUsecaseService } from './tree-usecase.service';
 import { Ornament } from './ornament/ornament';
@@ -23,7 +19,7 @@ import { Ornament } from './ornament/ornament';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TreeComponent {
+export class TreeComponent implements OnInit {
   private treeUsecaseService = inject(TreeUsecaseService);
   ornaments = signal<Ornament[]>([]);
 

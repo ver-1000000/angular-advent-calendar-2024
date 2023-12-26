@@ -91,15 +91,11 @@ class ViewModel {
   }
 }
 
-function transformViewModel(ornament: Ornament) {
-  return new ViewModel(ornament);
-}
-
 /**
  * {@link TreeComponent}から利用される、クリスマスツリーのオーナメント(飾り)を表すコンポーネント。
  */
 @Component({
-  selector: '[app-ornament]',
+  selector: '[app-ornament]', // eslint-disable-line @angular-eslint/component-selector
   standalone: true,
   templateUrl: './ornament.component.html',
   styleUrl: './ornament.component.scss',
@@ -107,14 +103,16 @@ function transformViewModel(ornament: Ornament) {
 })
 export class OrnamentComponent {
   private dialog = inject(Dialog);
-  @Input({ required: true, alias: 'ornament', transform: transformViewModel })
+  @Input({ required: true }) set ornament(ornament: Ornament) {
+    this.vm = new ViewModel(ornament);
+  }
   vm!: ViewModel;
 
   @HostBinding('class.disabled') get disabled() {
     return !this.vm.ornament.article.url;
   }
 
-  @HostListener('click', ['$event']) onClick(_: MouseEvent) {
+  @HostListener('click', ['$event']) onClick() {
     if (this.disabled) return;
     const data: Ornament['article'] = this.vm.ornament.article;
     const dialog = this.dialog.open(OrnamentDialogComponent, { data });
