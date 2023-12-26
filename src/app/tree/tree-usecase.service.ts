@@ -4,44 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { DOCUMENT } from '@angular/common';
 
-/**
- * オーナメントの座標を決定するためのシード。
- * 数値は座標の割合を表す。
- */
-const TREE_POINTS = [
-  // 1段目
-  { x: 0.46, y: 0.26 },
-  { x: 0.54, y: 0.26 },
-  // 2段目
-  { x: 0.4, y: 0.35 },
-  { x: 0.5, y: 0.35 },
-  { x: 0.6, y: 0.35 },
-  // 3段目
-  { x: 0.36, y: 0.44 },
-  { x: 0.45, y: 0.44 },
-  { x: 0.55, y: 0.44 },
-  { x: 0.64, y: 0.44 },
-  // 4段目
-  { x: 0.32, y: 0.53 },
-  { x: 0.41, y: 0.53 },
-  { x: 0.5, y: 0.53 },
-  { x: 0.59, y: 0.53 },
-  { x: 0.68, y: 0.53 },
-  // 5段目
-  { x: 0.28, y: 0.62 },
-  { x: 0.36, y: 0.62 },
-  { x: 0.455, y: 0.62 },
-  { x: 0.545, y: 0.62 },
-  { x: 0.64, y: 0.62 },
-  { x: 0.72, y: 0.62 },
-  // 6段目
-  { x: 0.24, y: 0.71 },
-  { x: 0.36, y: 0.71 },
-  { x: 0.5, y: 0.71 },
-  { x: 0.64, y: 0.71 },
-  { x: 0.76, y: 0.71 },
-];
-
 const ICON_SKEL = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
 /**
@@ -78,6 +40,7 @@ export class TreeUsecaseService {
    * サービスが保持している定数シードから、オーナメントの一覧を計算して返す。
    */
   async getOrnaments(): Promise<Ornament[]> {
+    const treePoints = this.getTreePoints();
     const feed = await this.getRss();
     const entries = Array.from(feed.querySelectorAll('entry')).reverse();
     const ornaments = entries.map((entry, i) => {
@@ -90,7 +53,7 @@ export class TreeUsecaseService {
         const url = entry.querySelector('link')?.getAttribute('href') ?? '';
         return { author, title, url, day: i + 1 };
       };
-      const { x, y } = TREE_POINTS[i];
+      const { x, y } = treePoints[i];
       return new Ornament({
         type: toType(i),
         x: toFixed(x),
@@ -100,6 +63,39 @@ export class TreeUsecaseService {
       });
     });
     return ornaments;
+  }
+
+  /**
+   * 25個のオーナメントの座標を計算して返す。
+   */
+  private getTreePoints(): { x: number; y: number }[] {
+    const levels = 6; // オーナメントの段数
+    const baseCount = 2; // 1段目のオーナメントの数
+    const spacing = 0.1; // オーナメント間の間隔
+    /** 1つ目のオーナメントの座標から、一段分のオーナメントの座標を計算する。 */
+    const calcStep = (startX: number, y: number, count: number) => {
+      /** 最下段のオーナメントは、最初と最後のオーナメントを削除して、間隔を広げた中央5つを返す。 */
+      const lastStep = (startX: number, y: number, count: number) => {
+        const points = Array.from({ length: count }, (_, i) => {
+          const x = startX + (i * spacing * 1.16 - spacing / 2);
+          return { x, y };
+        });
+        return points.slice(1, levels);
+      };
+      if (count > levels) return lastStep(startX, y, count);
+      const points = Array.from({ length: count }, (_, i) => {
+        const x = startX + i * spacing;
+        return { x, y };
+      });
+      return points;
+    };
+    const points = Array.from({ length: levels }, (_, level) => {
+      const count = baseCount + level;
+      const startX = 0.5 - (spacing * (count - 1)) / 2;
+      const y = 0.26 + level * 0.09;
+      return calcStep(startX, y, count);
+    }).flat();
+    return points;
   }
 
   /**
