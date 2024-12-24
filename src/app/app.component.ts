@@ -5,7 +5,6 @@ import { TitleComponent } from './title/title.component';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   imports: [TreeComponent, TitleComponent, BackgroundComponent],

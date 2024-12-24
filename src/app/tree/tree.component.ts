@@ -16,7 +16,6 @@ import { Ornament } from './ornament/ornament';
   styleUrl: './tree.component.scss',
   imports: [OrnamentComponent],
   providers: [TreeUsecaseService],
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeComponent implements OnInit {
