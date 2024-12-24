@@ -30,7 +30,7 @@ export class TreeUsecaseService {
       const feed = template.content.querySelector('feed') as HTMLUnknownElement;
       return feed;
     };
-    const FEED_URL = 'https://qiita.com/advent-calendar/2023/angular/feed';
+    const FEED_URL = 'https://qiita.com/advent-calendar/2024/angular/feed';
     const source = this.http.get(FEED_URL, { responseType: 'text' });
     const rss = await lastValueFrom(source);
     return parse(rss);
@@ -102,6 +102,6 @@ export class TreeUsecaseService {
    * アドベントカレンダーのページを開く。
    */
   navigateToAdventCalendar(): void {
-    open('https://qiita.com/advent-calendar/2023/angular');
+    open('https://qiita.com/advent-calendar/2024/angular');
   }
 }

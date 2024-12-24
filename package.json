@@ -1,13 +1,13 @@
 {
-  "name": "angular-advent-calendar-2023",
+  "name": "angular-advent-calendar-2024",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href /angular-advent-calendar-2023/",
+    "build": "ng build --base-href /angular-advent-calendar-2024/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:angular-advent-calendar-2023": "node dist/angular-advent-calendar-2023/server/server.mjs",
+    "serve:ssr:angular-advent-calendar-2024": "node dist/angular-advent-calendar-2024/server/server.mjs",
     "prettier": "prettier --write 'src/**/*.{ts,html,scss}'",
     "prettier:check": "prettier --check 'src/**/*.{ts,html,scss}'",
     "lint": "ng lint"

@@ -8,7 +8,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-advent-calendar-2023": {
+    "angular-advent-calendar-2024": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -22,7 +22,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/angular-advent-calendar-2023",
+            "outputPath": "dist/angular-advent-calendar-2024",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-advent-calendar-2023:build:production"
+              "buildTarget": "angular-advent-calendar-2024:build:production"
             },
             "development": {
-              "buildTarget": "angular-advent-calendar-2023:build:development"
+              "buildTarget": "angular-advent-calendar-2024:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "angular-advent-calendar-2023:build"
+            "buildTarget": "angular-advent-calendar-2024:build"
           }
         },
         "test": {
